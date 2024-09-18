@@ -30,7 +30,7 @@ class MagicLinkService {
             if (foundLink !== null) {
                 const today = new Date();
                 const past = new Date(foundLink.createdAt);
-                console.log(DateHelper.dateDiffInMinutes(today, past));
+                //console.log(DateHelper.dateDiffInMinutes(today, past));
                 return Promise.resolve(409);
             }
 
@@ -58,7 +58,6 @@ class MagicLinkService {
                 relations: ['user']
             });
 
-            console.log(`Logging in as: ${avKey}`);
 
             if (foundLink === null) {
                 return Promise.resolve(404);

@@ -45,7 +45,7 @@ class UserService {
             const foundUser = await userRepository.findOneBy({ avKey });
 
             if (foundUser) {
-                console.log('User', foundUser);
+                //console.log('User', foundUser);
                 return Promise.resolve(409);
             }
 

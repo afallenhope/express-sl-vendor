@@ -16,7 +16,6 @@ class MagicLinkController {
         const avKey = headers['x-secondlife-requested-by']?.toString();
 
         try {
-            console.log(req.body);
             if (avKey === undefined || callbackUrl === undefined) {
                 return {
                     statusCode: 400, status: 'Bad Request', message: 'Bad Request'
@@ -31,7 +30,6 @@ class MagicLinkController {
                     message: 'Link Exists already.'
                 };
             } else if (link === 404) {
-                console.log('User Not Found');
                 return {
                     statusCode: 404,
                     status: 'User not found',
