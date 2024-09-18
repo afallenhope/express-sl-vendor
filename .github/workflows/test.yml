@@ -1,13 +1,10 @@
 name: Run Tests
 
 on:
-  puh:
+  push:
     branches:
       - main
       - '**'
-  pull_request:
-    branches:
-      - main
 
 jobs:
   test:
