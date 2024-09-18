@@ -1,0 +1,51 @@
+  {
+    "env": {
+      "node": 1
+    },
+    "files": [
+      "src /**/*.(ts,js)"
+    ],
+    "ignore": [
+      "**/*.config.(ts,js)"
+    ],
+    "plugins": [
+      "prettier"
+    ],
+    "extends": [
+      "prettier"
+    ],
+    "rules": {
+      "semi": [
+        "error",
+        "always"
+      ],
+      "prefer-const": "error",
+      "no-unused-vars": "warn",
+      "comma-dangle": [
+        "warn",
+        "always-multiline"
+      ],
+      "comma-spacing": "warn",
+      "quotes": [
+        "error",
+        "single",
+        {
+          "avoidEscape": true
+        }
+      ],
+      "prettier/prettier": [
+        "error",
+        {
+          "singleQuote": true,
+          "semi": true
+        }
+      ],
+      "@typescript-eslint/quotes": [
+        "error",
+        "single",
+        {
+          "allowTemplateLiterals": true
+        }
+      ]
+    }
+  }
