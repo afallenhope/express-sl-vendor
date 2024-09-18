@@ -1,0 +1,1 @@
+interface IPayload<T> { };
