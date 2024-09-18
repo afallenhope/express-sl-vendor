@@ -22,12 +22,14 @@ jobs:
         with:
           node-version: '22.8.0'
 
-      - name: Install pnpm
-        run: npm install -g pnpm
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 8.6.3
 
       - name: Install dependencies using pnpm
         run: pnpm install
 
       - name: Run tests
         run: pnpm test
-
+s
