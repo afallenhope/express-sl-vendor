@@ -1,4 +1,3 @@
-import { AppDataSource } from '../config/data-source';
 import { NextFunction, query, Request, Response } from 'express';
 import { validate as isUUID } from 'uuid';
 import { User } from '../database/entities/UserEntity';
@@ -7,8 +6,6 @@ import CreateUserDto from '../dtos/CreateUserDto';
 import IResponse from '../interfaces/IResponse';
 
 export class UserController {
-    private userRepository = AppDataSource.getRepository(User);
-
     async all(request: Request, response: Response, next: NextFunction) {
         try {
             const all = await UserService.getAllUsers();
@@ -17,9 +14,6 @@ export class UserController {
             const error = e as Error
             return response.status(500).json({ statusCode: 500, message: error.message });
         }
-        //const users = this.userRepository.find();
-        //
-        //return response.status(200).json(users);
     }
 
     async one(request: Request, response: Response, next: NextFunction) {
@@ -63,46 +57,21 @@ export class UserController {
         } catch (ex) {
             return { statusCode: 500, message: ex };
         }
-
-        //try {
-        //    const foundUser = await this.userRepository.findOneBy({ avKey });
-        //    if (foundUser) {
-        //        console.log('User', foundUser);
-        //        return { statusCode: 409, message: 'user already exists' };
-        //    }
-        //
-        //    if ((avKey === undefined || avKey === null) ||
-        //        (firstName === undefined || firstName === null) ||
-        //        (lastName === undefined || lastName === null) ||
-        //        (username === undefined || username === null)) {
-        //        return { statusCode: 400, message: 'bad request' };
-        //    }
-        //
-        //    const user = new User();
-        //    user.username = username;
-        //    user.firstName = firstName;
-        //    user.lastName = lastName;
-        //    user.avKey = avKey
-        //
-        //    const bSuccess = this.userRepository.save(user);
-        //    return { statusCode: 201, message: bSuccess };
-        //} catch (e) {
-        //    const error: Error = e as Error;
-        //    return { statusCode: 500, message: error.message };
-        //}
     }
 
     async remove(request: Request, response: Response, next: NextFunction) {
         const { id } = request.params;
 
-        const userToRemove = await this.userRepository.findOneBy({ id });
+        try {
+            const userToRemove = await UserService.removeUserByUuid(id);
 
-        if (!userToRemove) {
-            return { statusCode: 404, message: 'user not found.' };
+            if (userToRemove === 404) {
+                return { statusCode: 404, message: 'user not found.' };
+            }
+
+            return { statusCode: 204 };
+        } catch (ex) {
+            return ex;
         }
-
-        await this.userRepository.remove(userToRemove);
-
-        return { statusCode: 204 };
     }
 }

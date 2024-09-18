@@ -79,6 +79,24 @@ class UserService {
             return Promise.reject({ statusCode: 500, message: error.message });
         }
     }
+
+    static async removeUserByUuid(avKey: string): Promise<number | IResponse> {
+
+        try {
+            const userToRemove = await userRepository.findOneBy({ avKey });
+
+            if (!userToRemove) {
+                return Promise.resolve(404);
+            }
+
+            return Promise.resolve(204);
+        } catch (ex) {
+            const error = ex as Error;
+            return Promise.reject({
+                statusCode: 500, message: error.message
+            });
+        }
+    }
 }
 
 export default UserService;
