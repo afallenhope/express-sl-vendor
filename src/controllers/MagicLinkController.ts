@@ -18,7 +18,7 @@ class MagicLinkController {
         try {
             if (avKey === undefined || callbackUrl === undefined) {
                 return {
-                    statusCode: 400, status: 'Bad Request', message: 'Bad Request'
+                    statusCode: 400, status: 'Bad Request', message: 'Invalid Data',
                 };
             }
 

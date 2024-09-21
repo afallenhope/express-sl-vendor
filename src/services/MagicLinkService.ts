@@ -28,8 +28,8 @@ class MagicLinkService {
             });
 
             if (foundLink !== null) {
-                const today = new Date();
-                const past = new Date(foundLink.createdAt);
+                //const today = new Date();
+                //const past = new Date(foundLink.createdAt);
                 //console.log(DateHelper.dateDiffInMinutes(today, past));
                 return Promise.resolve(409);
             }
@@ -41,7 +41,6 @@ class MagicLinkService {
             link.callbackUrl = callbackUrl;
 
             return await linkRepository.save(link);
-
         } catch (e) {
             const error = e as Error;
             return Promise.reject({ statusCode: 500, message: error.message });
@@ -81,7 +80,6 @@ class MagicLinkService {
             })
         }
     }
-
 }
 
 export default MagicLinkService;
