@@ -24,7 +24,8 @@ function registerRoute(route: IRoute) {
 
     const routeHandler = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const controllerInstance = new (route.controller as any)();
+            const dataSource = route.dataSource ?? null;
+            const controllerInstance = new (route.controller as any)(dataSource);
             const result = await controllerInstance[route.action](req, res, next);
             // NOTE:
             // I'm not enirely sure if I want to handle the response here or in the controller

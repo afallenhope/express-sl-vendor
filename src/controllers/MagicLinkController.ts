@@ -18,7 +18,7 @@ class MagicLinkController {
         try {
             if (avKey === undefined || callbackUrl === undefined) {
                 return {
-                    statusCode: 400, status: 'Bad Request', message: 'Invalid Data',
+                    statusCode: 400, status: 'BAD_REQUEST', message: 'Invalid Data',
                 };
             }
 
@@ -27,18 +27,19 @@ class MagicLinkController {
             if (link === 409) {
                 return {
                     statusCode: 409,
+                    status: 'CONFLICT_LINK',
                     message: 'Link Exists already.'
                 };
             } else if (link === 404) {
                 return {
                     statusCode: 404,
-                    status: 'User not found',
+                    status: 'RNF_USER',
                     message: 'User not found'
                 };
             } else if (link instanceof Link) {
                 return {
                     statusCode: 200,
-                    status: 'OK',
+                    status: 'OK_CODE',
                     message: link?.magicLink
                 };
             }
@@ -66,16 +67,17 @@ class MagicLinkController {
                 // for now, I'm omiting this.
                 //const response = await axios.get(result.callbackUrl);
                 //if (response.status === 200) {
-                //    console.log(response);
+                //    const { data } = response;
+                //    console.log('Received', data);
                 //}
 
-                return { statusCode: 200, status: 'OK', message: 'challenged code' };
+                return { statusCode: 200, status: 'OK_CHALLENGE', message: 'challenged code' };
             } else if (result === 404) {
                 return {
-                    statusCode: 404, status: 'Link not Found', message: 'Link Not Found'
+                    statusCode: 404, status: 'RNF_LINK', message: 'Link Not Found'
                 };
             } else if (result === 440) {
-                return { statusCode: 440, status: 'Session Expired', message: 'Link Expired.' };
+                return { statusCode: 440, status: 'SE_EXPIRED', message: 'Link Expired.' };
             }
         } catch (e) {
             const error = e as Error;

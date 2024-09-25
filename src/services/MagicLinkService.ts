@@ -1,13 +1,21 @@
 import IResponse from '../interfaces/IResponse';
 import { AppDataSource } from '../config/data-source'
+import { AppDataSourceTest } from '../config/data-source-test';
 import { Link } from '../database/entities/LinkEntity';
 import { User } from '../database/entities/UserEntity'
 import AuthHelper from '../helpers/AuthHelper';
 import DateHelper from '../helpers/DateHelper';
 import EnvHelper from '../helpers/EnvHelper';
 
-const userRepository = AppDataSource.getRepository(User);
-const linkRepository = AppDataSource.getRepository(Link);
+
+const userRepository = EnvHelper.getEnv('NODE_ENV', 'dev') === 'test' ?
+    AppDataSourceTest.getRepository(User) :
+    AppDataSource.getRepository(User);
+
+const linkRepository = EnvHelper.getEnv('NODE_ENV', 'dev') === 'test' ?
+    AppDataSourceTest.getRepository(Link) :
+    AppDataSource.getRepository(Link);
+
 const LINK_EXPIRATION = +(EnvHelper.getEnv('LINK_EXPIRATION', '5'));
 
 class MagicLinkService {
