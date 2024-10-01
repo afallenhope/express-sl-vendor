@@ -33,7 +33,7 @@ class MagicLinkController {
             } else if (link === 404) {
                 return {
                     statusCode: 404,
-                    status: 'RNF_USER',
+                    status: 'NOT_FOUND_USER',
                     message: 'User not found'
                 };
             } else if (link instanceof Link) {
@@ -74,7 +74,7 @@ class MagicLinkController {
                 return { statusCode: 200, status: 'OK_CHALLENGE', message: 'challenged code' };
             } else if (result === 404) {
                 return {
-                    statusCode: 404, status: 'RNF_LINK', message: 'Link Not Found'
+                    statusCode: 404, status: 'NOT_FOUND_LINK', message: 'Link Not Found'
                 };
             } else if (result === 440) {
                 return { statusCode: 440, status: 'SE_EXPIRED', message: 'Link Expired.' };
