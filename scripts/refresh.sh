@@ -1,3 +1,3 @@
 #!/bin/bash
-bash scripts/truncate.sh
+bash $PWD/truncate.sh
 pnpm migration:run

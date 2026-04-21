@@ -15,4 +15,5 @@ However keeps it fresh in the mind.
 
 1. Run `pnpm fetch --frozen-lockfile` command
 2. Setup database settings inside `src/config/data-source.ts` file
-3. Run `pnpm start` command
+3. Migrate database `pnpm migration:run`
+4. Run `pnpm start` command

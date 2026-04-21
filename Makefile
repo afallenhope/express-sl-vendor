@@ -1,3 +1,5 @@
+.PHONY init refresh reset setup run build test
+
 init:
 	pnpm migration:run
 
@@ -7,6 +9,9 @@ refresh:
 
 reset:
 	./scripts/truncate.sh
+
+setup:
+	./scripts/refresh.sh
 
 run:
 	pnpm start
