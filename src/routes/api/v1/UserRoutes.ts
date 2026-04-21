@@ -1,6 +1,6 @@
-import { IRoute } from "../../../interfaces/IRoute";
-import { UserController } from '../../..//controllers/UserController';
-import AuthenticationMiddleware from "../../../middlewares/AuthMiddleware";
+import { IRoute } from '../../../interfaces/IRoute';
+import { UserController } from '../../../controllers/UserController';
+import AuthenticationMiddleware from '../../../middlewares/AuthMiddleware';
 
 const UserRoutes: IRoute[] = [
   {

@@ -5,10 +5,11 @@ import { IRoute } from './interfaces/IRoute';
 import UserRoutes from './routes/api/v1/UserRoutes';
 import IMiddleware from './interfaces/IMiddleware';
 import LinkRoutes from './routes/api/v1/LinkRoutes';
+import ToolRoutes from './routes/api/v1/ToolRoutes';
 
 const router: Router = express.Router();
 
-const allRoutes = [ApiRoutes, UserRoutes, LinkRoutes];
+const allRoutes = [ApiRoutes, UserRoutes, LinkRoutes, ToolRoutes];
 
 /**
  *
