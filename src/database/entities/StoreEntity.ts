@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToMany } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
 import { BaseEntity } from './BaseEntity';
 import { User } from './UserEntity';
 
@@ -11,5 +11,10 @@ export class Store extends BaseEntity {
   description: string;
 
   @ManyToMany((type) => User, (user) => user.stores)
+  @JoinTable({
+    name: 'user_stores',
+    joinColumn: { name: 'store_id', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'user_id', referencedColumnName: 'id' },
+  })
   customers: User[];
 }
